@@ -8,7 +8,12 @@ import {
   GPT_URL,
   MASTER_URL,
 } from "../../Urls";
+
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+
+// import { DocViewer } from "office-ui-fabric-react/lib/DocViewer";
+// import { PowerPoint } from "react-powerpoint";
+// import { PptxGenJS } from "react-pptx";
 
 interface IMessageObj {
   user: string;
@@ -47,6 +52,37 @@ export default function Roche() {
   // for (let i = 0; i < 5; i++) {
   //   data.add(examplesText)
   // }
+
+  const MyHeader: any = (
+    state: any,
+    previousDocument: any,
+    nextDocument: any
+  ) => {
+    console.log("STate:", state);
+
+    if (!state.currentDocument || state.config?.header?.disableFileName) {
+      return null;
+    }
+    return (
+      <>
+        <div>{state.currentDocument.uri || ""}</div>
+        <div>
+          <button
+            onClick={previousDocument}
+            disabled={state.currentFileNo === 0}
+          >
+            Previous Document
+          </button>
+          <button
+            onClick={nextDocument}
+            disabled={state.currentFileNo >= state.documents.length - 1}
+          >
+            Next Document
+          </button>
+        </div>
+      </>
+    );
+  };
 
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
@@ -113,6 +149,23 @@ export default function Roche() {
   // state to store boolean value for disabling input field
   const [disable, setDisable] = useState(false);
 
+  const sampleData = {
+    Q1: "What is genrative AI",
+    Q2: "What is Enterprise Performance",
+  };
+  const [currentTab, setCurrentTab] = useState("");
+  const Data = {
+    slice1: [
+      "What is genrative AI ?",
+      "What is Enterprise Performance ?",
+      "What is Performance ?",
+    ],
+  };
+  const changeQuestion = (item: string) => {
+    setInputValue(item);
+    setCurrentTab(item);
+  };
+
   useEffect(() => {
     switch (dataSource) {
       case "pubmed":
@@ -139,26 +192,48 @@ export default function Roche() {
 
   const docs = [
     {
-      uri: require('../../files/AWS CCP certificated udemy.pdf'),
+      uri: require("../../files/2.pdf"),
     },
     {
-      uri: require("../../files/GenAI-Presentation-For-EP.pptx"),
-      fileType: "pptx",
-      fileName: "GenAI-Presentation-For-EP.pptx",
-    }, // Local File
+      uri: require("./GenAI-Presentation-For-EP.pptx"),
+    },
   ];
+  // const docs = [{ uri: 'https://example.com/path/to/your_pptx_file.pptx' }];
+  //  const urlData = !!path ? [{ uri: require("./samplepptx.pptx"), fileType: 'docx' }] : [];
+
+  const changeDoc = (e: any) => {
+    console.log("event:", e);
+  };
   return (
     <div className="roche-main-container">
       <div className="content-section">
         <aside className="side-menu">
           <div className="pdf-section">
-            {/* <iframe src="https://research.google.com/pubs/archive/44678.pdf"
-   width="100%" height="100%" /> */}
+            {/* <iframe src={"https://docs.google.com/presentation/d/17e4Dx0lqq0aom_LGuf62bODkLsU2eQRvymhd_57BEVg"} width="600" height="400" title="pptx-iframe" /> */}
+
             <DocViewer
+              className="doc-viewer"
               documents={docs}
+              config={{ header: { overrideComponent: MyHeader } }}
               pluginRenderers={DocViewerRenderers}
-              style={{ height: "100%", width: "100%" }}
+              onDocumentChange={changeDoc}
             />
+          </div>
+          <div className="temp-box">
+            {Object.entries(Data).map(([key, value]) => (
+              <div className="slice-box">
+                {value.map((item) => (
+                  <div
+                    className={
+                      currentTab === item ? "qstn-box activeTab" : "qstn-box"
+                    }
+                    onClick={() => changeQuestion(item)}
+                  >
+                    &nbsp;&nbsp;{item}&nbsp;&nbsp;
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </aside>
 

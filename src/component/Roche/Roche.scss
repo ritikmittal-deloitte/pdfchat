@@ -185,15 +185,18 @@
     height: calc(100vh - 6rem);
     display: flex;
     justify-content: space-evenly;
-    margin-top: 1rem;
 
     .side-menu {
-      height: 98%;
+      height:100vh;
       width: 70%;
       background-color: #1b1b1b;
       border-radius: 0.625rem;
       color: white;
       font-family: Open Sans;
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
 
       .side-menu-buttons-holder {
         height: 15%;
@@ -275,7 +278,7 @@
     }
 
     .chat-box {
-      height: 98%;
+      height: 100vh;
       width: 30%;
       border-radius: 0.625rem;
 
@@ -406,6 +409,48 @@
           overflow-y: auto;
         }
       }
+    }
+    .slice-box{
+      display: flex;
+      margin-left: 2%;
+      width: 96%;
+      justify-content: space-evenly;
+    }
+    .qstn-box{
+      border: 1px solid #D3D3D3;
+      margin-left: 2%;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      min-height: 1.5rem;
+    }
+          .activeTab {
+        padding: 0.5625rem 1.25rem;
+        border-radius: 0.5rem;
+        background: #444;
+        text-align: center;
+        // align-items: center;
+        cursor: pointer;
+      }
+    .temp-box{
+      position: absolute;
+      z-index: 1;
+      height: 8vh;
+      width:70%;
+      border: 1px solid #D3D3D3;
+      background-color: #1B1B1B;
+      border-radius: 12px;
+      display: flex;
+      color: #fff;
+      margin-top: 66%;
+      margin-left: 15%;
+      box-sizing: border-box;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      display: flex;
+      align-items: center;
+
     }
 
     .regenerate-button-holder {
