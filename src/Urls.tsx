@@ -1,0 +1,11 @@
+export const BASE_URL = 'https://hashedin-poc-urtjok3rza-wl.a.run.app/'
+export const CLINICAL_URL = 'chatbot/clinicaltrial/'
+export const PUMBED_URL = 'chatbot/pubmed/'
+export const MASTER_URL = 'chatbot/master/'
+export const GPT_URL = 'chatbot/chatgpt/'
+
+// export const BASE_URL = 'http://127.0.0.1:8000/'
+// export const CLINICAL_URL = 'api/clinicaltrial/'
+// export const PUMBED_URL = 'api/pubmed/'
+// export const MASTER_URL = 'api/master/'
+// export const GPT_URL = 'api/chatgpt/'
