@@ -30,7 +30,7 @@ export default function Roche() {
   const [responses, setResponses] = useState<IMessageObj[]>([]);
   const [message, setMessage] = useState();
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
+//  const [showModal, setShowModal] = useState<boolean>(false);
 
   const examplesText = [
     "What is the standard of care for Diffuse large B cell Lymphoma ?",
